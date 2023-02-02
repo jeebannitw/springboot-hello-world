@@ -15,7 +15,7 @@ node {
                  echo "build number: ${env.BUILD_NUMBER}"
                  //dockerImage = docker.build("spring-boot-docker:${env.BUILD_NUMBER}")
                  sh "pwd"
-                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER}"
+                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER} pwd"
                  echo "building the docker image finished"
           }
 
