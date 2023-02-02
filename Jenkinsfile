@@ -1,5 +1,5 @@
 node {
-    def WORKSPACE = "/Users/jeebanswain/Documents/workspace"
+    def WORKSPACE = "/Users/jeebanswain/.jenkins/workspace"
     def dockerImageTag = "spring-boot-docker${env.BUILD_NUMBER}"
 
     try{
@@ -11,14 +11,17 @@ node {
                 branch: 'main'
          }
           stage('Build docker') {
-                 dockerImage = docker.build("spring-boot-docker:${env.BUILD_NUMBER}")
+                 echo "building the docker image started"
+                 sh "docker build -t spring-boot-docker ."
+                 echo "building the docker image finished"
           }
 
           stage('Deploy docker'){
                   echo "Docker Image Tag Name: ${dockerImageTag}"
-                  sh "docker stop spring-boot-docker || true && docker rm spring-boot-docker || true"
-                  sh "docker run --name spring-boot-docker -d -p 9090:8072 spring-boot-docker:${env.BUILD_NUMBER}"
+                  sh "docker run -p 9090:8072  spring-boot-docker"
+                  echo "running the docker application"
           }
+
     }catch(e){
 //         currentBuild.result = "FAILED"
         throw e
@@ -26,6 +29,7 @@ node {
 //         notifyBuild(currentBuild.result)
     }
 }
+
 
 def notifyBuild(String buildStatus = 'STARTED'){
 
