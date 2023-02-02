@@ -12,7 +12,7 @@ node {
          }
           stage('Build docker') {
                  echo "building the docker image started"
-                 sh "docker build -t spring-boot-docker ."
+                 sh "docker build -t spring-boot-docker test-hello-world"
                  echo "building the docker image finished"
           }
 
