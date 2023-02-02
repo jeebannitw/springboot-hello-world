@@ -14,7 +14,8 @@ node {
                  echo "building the docker image started"
                  echo "build number: ${env.BUILD_NUMBER}"
                  //dockerImage = docker.build("spring-boot-docker:${env.BUILD_NUMBER}")
-                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER} /Users/jeebanswain/.jenkins/workspace/hello-world-deployment-v1"
+                 echo "pwd"
+                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER}"
                  echo "building the docker image finished"
           }
 
