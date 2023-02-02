@@ -1,5 +1,5 @@
 node {
-    def WORKSPACE = "/Users/jeebanswain/.jenkins/workspace"
+    def WORKSPACE = "/Users/jeebanswain/.jenkins/workspace/"
     def dockerImageTag = "spring-boot-docker${env.BUILD_NUMBER}"
 
     try{
@@ -12,13 +12,14 @@ node {
          }
           stage('Build docker') {
                  echo "building the docker image started"
-                 sh "docker build -t spring-boot-docker test-hello-world"
+                 dockerImage = docker.build("spring-boot-docker:${env.BUILD_NUMBER}")
                  echo "building the docker image finished"
           }
 
           stage('Deploy docker'){
                   echo "Docker Image Tag Name: ${dockerImageTag}"
-                  sh "docker run -p 9090:8072  spring-boot-docker"
+                  echo "trying to run the docker application"
+                  sh "docker run -p 9090:8072 spring-boot-docker:${env.BUILD_NUMBER}"
                   echo "running the docker application"
           }
 
