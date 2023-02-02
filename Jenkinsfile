@@ -1,5 +1,5 @@
 node {
-    def WORKSPACE = "/Users/jeebanswain/.jenkins/workspace/spring-boot-docker"
+    def WORKSPACE = "/Users/jeebanswain/.jenkins/workspace/spring-boot-docker/"
     def dockerImageTag = "spring-boot-docker${env.BUILD_NUMBER}"
 
     try{
@@ -14,7 +14,7 @@ node {
                  echo "building the docker image started"
                  echo "build number: ${env.BUILD_NUMBER}"
                  //dockerImage = docker.build("spring-boot-docker:${env.BUILD_NUMBER}")
-                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER} ."
+                 sh "docker build -t spring-boot-docker:${env.BUILD_NUMBER} /Users/jeebanswain/.jenkins/workspace/spring-boot-docker/"
                  echo "building the docker image finished"
           }
 
